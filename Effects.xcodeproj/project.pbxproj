@@ -12,6 +12,8 @@
 		B0BEDD5E1C09428400DED469 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0BEDD5C1C09428400DED469 /* Main.storyboard */; };
 		B0BEDD601C09428400DED469 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B0BEDD5F1C09428400DED469 /* Assets.xcassets */; };
 		B0BEDD631C09428400DED469 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0BEDD611C09428400DED469 /* LaunchScreen.storyboard */; };
+		B0BEDD6C1C0942B000DED469 /* TTStarfieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0BEDD6B1C0942B000DED469 /* TTStarfieldView.swift */; };
+		B0BEDD6E1C09443D00DED469 /* TTFireworksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0BEDD6D1C09443D00DED469 /* TTFireworksView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		B0BEDD5F1C09428400DED469 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B0BEDD621C09428400DED469 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B0BEDD641C09428400DED469 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B0BEDD6B1C0942B000DED469 /* TTStarfieldView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TTStarfieldView.swift; path = Views/TTStarfieldView.swift; sourceTree = "<group>"; };
+		B0BEDD6D1C09443D00DED469 /* TTFireworksView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TTFireworksView.swift; path = Views/TTFireworksView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +58,7 @@
 		B0BEDD571C09428400DED469 /* Effects */ = {
 			isa = PBXGroup;
 			children = (
+				B0BEDD6A1C09429300DED469 /* Views */,
 				B0BEDD581C09428400DED469 /* AppDelegate.swift */,
 				B0BEDD5A1C09428400DED469 /* ViewController.swift */,
 				B0BEDD5C1C09428400DED469 /* Main.storyboard */,
@@ -62,6 +67,15 @@
 				B0BEDD641C09428400DED469 /* Info.plist */,
 			);
 			path = Effects;
+			sourceTree = "<group>";
+		};
+		B0BEDD6A1C09429300DED469 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B0BEDD6B1C0942B000DED469 /* TTStarfieldView.swift */,
+				B0BEDD6D1C09443D00DED469 /* TTFireworksView.swift */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,6 +151,8 @@
 			files = (
 				B0BEDD5B1C09428400DED469 /* ViewController.swift in Sources */,
 				B0BEDD591C09428400DED469 /* AppDelegate.swift in Sources */,
+				B0BEDD6C1C0942B000DED469 /* TTStarfieldView.swift in Sources */,
+				B0BEDD6E1C09443D00DED469 /* TTFireworksView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
