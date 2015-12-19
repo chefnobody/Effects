@@ -18,18 +18,29 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qf6-Qw-eSJ" customClass="StarfieldView" customModule="Effects" customModuleProvider="target">
-                                <rect key="frame" x="50" y="50" width="500" height="500"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="speed">
+                                        <real key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="starColor">
+                                        <color key="value" red="1" green="0.97862243863933895" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="canvasColor">
+                                        <color key="value" red="0.88620079419889497" green="0.86725598234304158" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="qf6-Qw-eSJ" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="50" id="BkZ-tz-T8o"/>
-                            <constraint firstAttribute="trailing" secondItem="qf6-Qw-eSJ" secondAttribute="trailing" constant="50" id="dRe-x6-whD"/>
-                            <constraint firstItem="qf6-Qw-eSJ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="50" id="euH-Og-EDW"/>
-                            <constraint firstItem="qf6-Qw-eSJ" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" constant="-50" id="vS6-2Y-e7z"/>
+                            <constraint firstItem="qf6-Qw-eSJ" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="BkZ-tz-T8o"/>
+                            <constraint firstAttribute="trailing" secondItem="qf6-Qw-eSJ" secondAttribute="trailing" id="dRe-x6-whD"/>
+                            <constraint firstItem="qf6-Qw-eSJ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="euH-Og-EDW"/>
+                            <constraint firstItem="qf6-Qw-eSJ" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="vS6-2Y-e7z"/>
                         </constraints>
                     </view>
                 </viewController>

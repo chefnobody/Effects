@@ -21,18 +21,15 @@ public class StarfieldView: UIView {
     // MARK:- Public props for consumers
     
     // Speed is the rate at which the starfield moves
-    @IBInspectable var speed = 1.0
+    @IBInspectable var speed: Float = 1.0
     
     // Density can be described in terms of the percentage
     // of the view's bounds covered by stars at any given moment
     // "Lorraine ... you are my density."
-    @IBInspectable var density = 0.1
+    @IBInspectable var density: Float = 0.1
     
-    // In which direction do the stars travel?
     @IBInspectable var direction: StarfieldDirection = .NorthSouth
-
     @IBInspectable var starColor: UIColor = UIColor.whiteColor()
-    
     @IBInspectable var canvasColor: UIColor = UIColor.blackColor()
     
     // MARK:- Private props used to manage animations variables
@@ -47,17 +44,24 @@ public class StarfieldView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.setup()
+        setup()
     }
     
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        self.setup()
+        setup()
+    }
+    
+    override public func didMoveToSuperview() {
+        super.didMoveToSuperview()
     }
     
     override public func layoutSubviews() {
         super.layoutSubviews()
-
+        
+        // can't find a better place for this. setting it over and over seems redundant
+        backgroundColor = canvasColor
+        
         // inset view rect so stars can appear as though they're coming from off-screen
         // this also seems to be the most reliable place for an accurate value for 'bounds'
         insetRect = CGRectInset(bounds, -20, -20)
@@ -78,26 +82,26 @@ public class StarfieldView: UIView {
             // 1 is the smallest size, 20 the largest
             let squareSize = 10 - CGFloat(10 * beginTimeDurationFactor) // subtract from 10 to flip it.
             
-            let layer = CALayer()
-            layer.bounds = CGRectMake(0, 0, squareSize, squareSize)
-            layer.position = from
-            layer.backgroundColor = starColor.CGColor
+            let shapeLayer = CALayer()
+            shapeLayer.bounds = CGRectMake(0, 0, squareSize, squareSize)
+            shapeLayer.position = from
+            shapeLayer.backgroundColor = starColor.CGColor
             
             let fromValue = interpolatingValue(from);
             let toValue = interpolatingValue(to)
-            let animation = createBasicAnimation(fromValue, toValue: toValue, duration: randomDuration, beginTime: randomBeginTime)
+            let animation = createBasicAnimation(fromValue, toValue: toValue, duration: randomDuration, beginTime: randomBeginTime, speed: speed)
             
-            self.layer.addSublayer(layer)
+            layer.addSublayer(shapeLayer)
             
-            layer.addAnimation(animation, forKey: ("movement-animation-\(i)"))
+            shapeLayer.addAnimation(animation, forKey: ("movement-animation-\(i)"))
             
             // set layer's final position
-            layer.position = to
+            shapeLayer.position = to
         }
     }
     
     func setup() {
-        self.backgroundColor = UIColor.blackColor()
+        //backgroundColor = canvasColor
     }
     
     func fromPoint() -> CGPoint {
@@ -141,7 +145,7 @@ public class StarfieldView: UIView {
         }
     }
     
-    func createBasicAnimation(fromValue: CGFloat, toValue: CGFloat, duration: Double, beginTime: Double) -> CABasicAnimation {
+    func createBasicAnimation(fromValue: CGFloat, toValue: CGFloat, duration: Double, beginTime: Double, speed: Float) -> CABasicAnimation {
         let animation = CABasicAnimation()
         animation.keyPath = keyPathFromDirection()
         animation.fromValue = fromValue
@@ -149,6 +153,7 @@ public class StarfieldView: UIView {
         animation.duration = duration
         animation.fillMode = animationFillMode
         animation.beginTime = CACurrentMediaTime() + CFTimeInterval(beginTime)
+        animation.speed = speed
         return animation
     }
     
