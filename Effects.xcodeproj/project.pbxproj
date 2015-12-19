@@ -7,16 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B092C8A41C09F29E00AEF76E /* LaserShowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B092C8A31C09F29E00AEF76E /* LaserShowView.swift */; };
 		B0BEDD591C09428400DED469 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0BEDD581C09428400DED469 /* AppDelegate.swift */; };
 		B0BEDD5B1C09428400DED469 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0BEDD5A1C09428400DED469 /* ViewController.swift */; };
 		B0BEDD5E1C09428400DED469 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0BEDD5C1C09428400DED469 /* Main.storyboard */; };
 		B0BEDD601C09428400DED469 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B0BEDD5F1C09428400DED469 /* Assets.xcassets */; };
 		B0BEDD631C09428400DED469 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0BEDD611C09428400DED469 /* LaunchScreen.storyboard */; };
-		B0BEDD6C1C0942B000DED469 /* TTStarfieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0BEDD6B1C0942B000DED469 /* TTStarfieldView.swift */; };
-		B0BEDD6E1C09443D00DED469 /* TTFireworksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0BEDD6D1C09443D00DED469 /* TTFireworksView.swift */; };
+		B0BEDD6C1C0942B000DED469 /* StarfieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0BEDD6B1C0942B000DED469 /* StarfieldView.swift */; };
+		B0BEDD6E1C09443D00DED469 /* FireworksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0BEDD6D1C09443D00DED469 /* FireworksView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B092C8A31C09F29E00AEF76E /* LaserShowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LaserShowView.swift; path = Views/LaserShowView.swift; sourceTree = "<group>"; };
 		B0BEDD551C09428400DED469 /* Effects.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Effects.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0BEDD581C09428400DED469 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B0BEDD5A1C09428400DED469 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -24,8 +26,8 @@
 		B0BEDD5F1C09428400DED469 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B0BEDD621C09428400DED469 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B0BEDD641C09428400DED469 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B0BEDD6B1C0942B000DED469 /* TTStarfieldView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TTStarfieldView.swift; path = Views/TTStarfieldView.swift; sourceTree = "<group>"; };
-		B0BEDD6D1C09443D00DED469 /* TTFireworksView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TTFireworksView.swift; path = Views/TTFireworksView.swift; sourceTree = "<group>"; };
+		B0BEDD6B1C0942B000DED469 /* StarfieldView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StarfieldView.swift; path = Views/StarfieldView.swift; sourceTree = "<group>"; };
+		B0BEDD6D1C09443D00DED469 /* FireworksView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FireworksView.swift; path = Views/FireworksView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,8 +74,9 @@
 		B0BEDD6A1C09429300DED469 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				B0BEDD6B1C0942B000DED469 /* TTStarfieldView.swift */,
-				B0BEDD6D1C09443D00DED469 /* TTFireworksView.swift */,
+				B0BEDD6B1C0942B000DED469 /* StarfieldView.swift */,
+				B0BEDD6D1C09443D00DED469 /* FireworksView.swift */,
+				B092C8A31C09F29E00AEF76E /* LaserShowView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -151,8 +154,9 @@
 			files = (
 				B0BEDD5B1C09428400DED469 /* ViewController.swift in Sources */,
 				B0BEDD591C09428400DED469 /* AppDelegate.swift in Sources */,
-				B0BEDD6C1C0942B000DED469 /* TTStarfieldView.swift in Sources */,
-				B0BEDD6E1C09443D00DED469 /* TTFireworksView.swift in Sources */,
+				B0BEDD6C1C0942B000DED469 /* StarfieldView.swift in Sources */,
+				B0BEDD6E1C09443D00DED469 /* FireworksView.swift in Sources */,
+				B092C8A41C09F29E00AEF76E /* LaserShowView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -300,6 +304,7 @@
 				B0BEDD691C09428400DED469 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

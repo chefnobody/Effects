@@ -1,5 +1,5 @@
 //
-//  TTFireworksView.swift
+//  FireworksView.swift
 //  Effects
 //
 //  Created by Aaron Connolly on 11/27/15.
@@ -9,7 +9,7 @@
 import UIKit
 
 @IBDesignable
-public class TTFireworksView: UIView {
+public class FireworksView: UIView {
     
     @IBInspectable var dotSize: CGFloat = 5.0
     @IBInspectable var dotCount: Int = 1000
