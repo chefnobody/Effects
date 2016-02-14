@@ -12,3 +12,7 @@ starfieldView.starColor = UIColor.whiteColor()
 starfieldView.canvasColor = UIColor.blackColor()
 view.addSubview(starfieldView)
 ```
+
+Here's what `StarfieldView` looks like:
+
+![StarfieldView in action.](starfield-view.gif)
