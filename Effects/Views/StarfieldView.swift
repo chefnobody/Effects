@@ -28,7 +28,7 @@ public class StarfieldView: UIView {
     // "Lorraine ... you are my density."
     @IBInspectable var density: Float = 0.1
     
-    @IBInspectable var direction: StarfieldDirection = .NorthSouth
+    @IBInspectable var direction: StarfieldDirection = .EastWest
     @IBInspectable var starColor: UIColor = UIColor.whiteColor()
     @IBInspectable var canvasColor: UIColor = UIColor.blackColor()
     
@@ -44,26 +44,21 @@ public class StarfieldView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setup()
     }
     
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        setup()
     }
-    
-    override public func didMoveToSuperview() {
-        super.didMoveToSuperview()
-    }
-    
+
     override public func layoutSubviews() {
         super.layoutSubviews()
         
-        // can't find a better place for this. setting it over and over seems redundant
+        // Can't find a better place for this. Setting it over and over seems redundant
         backgroundColor = canvasColor
         
-        // inset view rect so stars can appear as though they're coming from off-screen
+        // Inset view rect so stars can appear as though they're coming from off-screen
         // this also seems to be the most reliable place for an accurate value for 'bounds'
+        // otherwise I'd take it out of -layoutSubviews
         insetRect = CGRectInset(bounds, -20, -20)
 
         for i in 1...count {
@@ -100,9 +95,7 @@ public class StarfieldView: UIView {
         }
     }
     
-    func setup() {
-        //backgroundColor = canvasColor
-    }
+    // MARK:- Private methods
     
     func fromPoint() -> CGPoint {
         let randomX = CGFloat(randomIntUpToMax(Int(CGRectGetWidth(insetRect))))
