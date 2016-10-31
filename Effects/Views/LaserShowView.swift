@@ -9,44 +9,51 @@
 import UIKit
 
 @IBDesignable
-public class LaserShowView: UIView {
+open class LaserShowView: UIView {
     
     @IBInspectable var laserCount: Int = 1000
     @IBInspectable var animationDuration: Double = 10.0
     
-    override public func layoutSubviews() {
+    override open func layoutSubviews() {
         super.layoutSubviews()
         
         // offset main view rect by 200 on all sides so dots will come from off-screen sometimes.
-        let insetRect = CGRectInset(self.frame, -10, -10)
+//        let insetRect = self.frame.insetBy(dx: -10, dy: -10)
         //let minX = CGRectGetMinX(insetRect)
         //let maxX = CGRectGetMaxX(insetRect)
-        let maxHeight = CGRectGetHeight(insetRect)
+//        let maxHeight = insetRect.height
         //let maxWidth = CGRectGetWidth(insetRect)
         //let fillMode = kCAFillModeBoth
         
-        let laserColor = UIColor.lightGrayColor()
+//        let laserColor = UIColor.lightGray
         
-        for _ in 1...self.laserCount {
+        var points: [CGPoint]
+        
+        for _ in 1...laserCount {
+            let point = frame.randomPointInside()
+            points.append(point)
+        }
+        
+        self.layer.addSublayer(<#T##layer: CALayer##CALayer#>)
             
-            //let xFrom = minX
-            //let xTo = maxX
-            let randomY = CGFloat(arc4random_uniform(UInt32(maxHeight) + 1))
-            //let randomDuration = Double(arc4random_uniform(UInt32(self.animationDuration) + 1))
-            let randomBeginTime = Double(arc4random_uniform(UInt32(self.laserCount) + 1))
-            
-            let flip = (randomBeginTime % 2 == 0)
-            
-            // draw straight line across screen starting from random Y position
-            let (layer, _, _) = self.getLineShapeLayer(self.frame, yPosition: randomY, flip: flip)
-            
-            //let animation = self.getLineAnimation()
-            
-            layer.strokeColor = laserColor.CGColor
-            layer.lineWidth = 2.0
+//            //let xFrom = minX
+//            //let xTo = maxX
+//            let randomY = CGFloat(arc4random_uniform(UInt32(maxHeight) + 1))
+//            //let randomDuration = Double(arc4random_uniform(UInt32(self.animationDuration) + 1))
+//            let randomBeginTime = Double(arc4random_uniform(UInt32(self.laserCount) + 1))
+//            
+//            let flip = (randomBeginTime.truncatingRemainder(dividingBy: 2) == 0)
+//            
+//            // draw straight line across screen starting from random Y position
+//            let (layer, _, _) = self.getLineShapeLayer(self.frame, yPosition: randomY, flip: flip)
+//            
+//            //let animation = self.getLineAnimation()
+//            
+//            layer.strokeColor = laserColor.cgColor
+//            layer.lineWidth = 2.0
             
             // stroke begin animation ? 
-
+            
             
             // position it off-screen?
             
@@ -93,7 +100,7 @@ public class LaserShowView: UIView {
 //            
 
             // add layer as sublayer
-            self.layer.addSublayer(layer)
+            //self.layer.addSublayer(layer)
 
             // add animations
 //            layer.addAnimation(strokeStartAnimation, forKey: ("stroke-animation-\(i)"))
@@ -106,35 +113,35 @@ public class LaserShowView: UIView {
 //            }
             
             
-        }
+        //}
     }
     
     // MARK:- Private methods
     
     // returns a shape layer, its reference start-point and length for use by an animation
-    func getLineShapeLayer(referenceFrame: CGRect, yPosition: CGFloat, flip: Bool) -> (CAShapeLayer, CGPoint, CGFloat) {
+    func getLineShapeLayer(_ referenceFrame: CGRect, yPosition: CGFloat, flip: Bool) -> (CAShapeLayer, CGPoint, CGFloat) {
         
-        let minX = CGRectGetMinX(referenceFrame)
+        let minX = referenceFrame.minX
         //let maxX = CGRectGetMaxX(referenceFrame)
-        let maxWidth = CGRectGetWidth(referenceFrame)
+        let maxWidth = referenceFrame.width
         let randomWidth = CGFloat(arc4random_uniform(UInt32(maxWidth) + 1))
         
-        var beginPoint = CGPointZero
-        var endPoint = CGPointZero
+        var beginPoint = CGPoint.zero
+        var endPoint = CGPoint.zero
         
         if flip {
-            beginPoint = CGPointMake(minX - randomWidth, yPosition)
-            endPoint = CGPointMake(minX, yPosition)
+            beginPoint = CGPoint(x: minX - randomWidth, y: yPosition)
+            endPoint = CGPoint(x: minX, y: yPosition)
         } else {
             
         }
         
         let path = UIBezierPath()
-        path.moveToPoint(beginPoint)
-        path.addLineToPoint(endPoint)
+        path.move(to: beginPoint)
+        path.addLine(to: endPoint)
         
         let layer = CAShapeLayer()
-        layer.path = path.CGPath
+        layer.path = path.cgPath
         
         return (layer, beginPoint, randomWidth)
     }
