@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B01B60681DC665F40027B518 /* Standard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01B60671DC665F40027B518 /* Standard.swift */; };
+		B07B2CA91C71608B00CA57CF /* TubularView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07B2CA81C71608B00CA57CF /* TubularView.swift */; };
 		B092C8A41C09F29E00AEF76E /* LaserShowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B092C8A31C09F29E00AEF76E /* LaserShowView.swift */; };
 		B0BEDD591C09428400DED469 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0BEDD581C09428400DED469 /* AppDelegate.swift */; };
 		B0BEDD5B1C09428400DED469 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0BEDD5A1C09428400DED469 /* ViewController.swift */; };
@@ -18,6 +20,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B01B60671DC665F40027B518 /* Standard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Standard.swift; sourceTree = "<group>"; };
+		B07B2CA81C71608B00CA57CF /* TubularView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TubularView.swift; path = Views/TubularView.swift; sourceTree = "<group>"; };
 		B092C8A31C09F29E00AEF76E /* LaserShowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LaserShowView.swift; path = Views/LaserShowView.swift; sourceTree = "<group>"; };
 		B0BEDD551C09428400DED469 /* Effects.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Effects.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0BEDD581C09428400DED469 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -63,6 +67,7 @@
 				B0BEDD6A1C09429300DED469 /* Views */,
 				B0BEDD581C09428400DED469 /* AppDelegate.swift */,
 				B0BEDD5A1C09428400DED469 /* ViewController.swift */,
+				B01B60671DC665F40027B518 /* Standard.swift */,
 				B0BEDD5C1C09428400DED469 /* Main.storyboard */,
 				B0BEDD5F1C09428400DED469 /* Assets.xcassets */,
 				B0BEDD611C09428400DED469 /* LaunchScreen.storyboard */,
@@ -74,9 +79,10 @@
 		B0BEDD6A1C09429300DED469 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				B0BEDD6B1C0942B000DED469 /* StarfieldView.swift */,
 				B0BEDD6D1C09443D00DED469 /* FireworksView.swift */,
 				B092C8A31C09F29E00AEF76E /* LaserShowView.swift */,
+				B0BEDD6B1C0942B000DED469 /* StarfieldView.swift */,
+				B07B2CA81C71608B00CA57CF /* TubularView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -108,11 +114,12 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0710;
-				LastUpgradeCheck = 0710;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Top Turn Software";
 				TargetAttributes = {
 					B0BEDD541C09428400DED469 = {
 						CreatedOnToolsVersion = 7.1.1;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -152,8 +159,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B01B60681DC665F40027B518 /* Standard.swift in Sources */,
 				B0BEDD5B1C09428400DED469 /* ViewController.swift in Sources */,
 				B0BEDD591C09428400DED469 /* AppDelegate.swift in Sources */,
+				B07B2CA91C71608B00CA57CF /* TubularView.swift in Sources */,
 				B0BEDD6C1C0942B000DED469 /* StarfieldView.swift in Sources */,
 				B0BEDD6E1C09443D00DED469 /* FireworksView.swift in Sources */,
 				B092C8A41C09F29E00AEF76E /* LaserShowView.swift in Sources */,
@@ -195,8 +204,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -239,8 +250,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -259,6 +272,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -271,6 +285,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.topturn.Effects;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -282,6 +297,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.topturn.Effects;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

@@ -9,22 +9,22 @@
 import UIKit
 
 @IBDesignable
-public class FireworksView: UIView {
+open class FireworksView: UIView {
     
     @IBInspectable var dotSize: CGFloat = 5.0
     @IBInspectable var dotCount: Int = 1000
     @IBInspectable var animationDuration: Double = 10.0
     
-    override public func layoutSubviews() {
+    override open func layoutSubviews() {
         super.layoutSubviews()
         
         // offset main view rect by 200 on all sides so dots will come from off-screen sometimes.
-        let offsetRect = CGRectOffset(self.frame, 400, 400)
-        let maxWidth = UInt32(CGRectGetWidth(offsetRect))
-        let maxHeight = UInt32(CGRectGetHeight(offsetRect))
+        let offsetRect = self.frame.offsetBy(dx: 400, dy: 400)
+        let maxWidth = UInt32(offsetRect.width)
+        let maxHeight = UInt32(offsetRect.height)
         let fillMode = kCAFillModeBoth
         
-        let squareColor = UIColor.lightGrayColor()
+        let squareColor = UIColor.lightGray
         
         for i in 1...self.dotCount {
             
@@ -37,9 +37,9 @@ public class FireworksView: UIView {
             
             // create new layer
             let layer = CALayer()
-            layer.bounds = CGRectMake(0, 0, self.dotSize, self.dotSize)
-            layer.position = CGPointMake(randomXFrom, randomYFrom)
-            layer.backgroundColor = squareColor.CGColor
+            layer.bounds = CGRect(x: 0, y: 0, width: self.dotSize, height: self.dotSize)
+            layer.position = CGPoint(x: randomXFrom, y: randomYFrom)
+            layer.backgroundColor = squareColor.cgColor
             
             // x animation
             let animationX = CABasicAnimation()
@@ -73,12 +73,12 @@ public class FireworksView: UIView {
             self.layer.addSublayer(layer)
             
             // add animations
-            layer.addAnimation(animationX, forKey: ("movement-animation-x-\(i)"))
-            layer.addAnimation(animationY, forKey: ("movement-animation-y-\(i)"))
-            layer.addAnimation(animationOpacity, forKey: ("opacity-animation-\(i)"))
+            layer.add(animationX, forKey: ("movement-animation-x-\(i)"))
+            layer.add(animationY, forKey: ("movement-animation-y-\(i)"))
+            layer.add(animationOpacity, forKey: ("opacity-animation-\(i)"))
             
             // set layer's final position
-            layer.position = CGPointMake(randomXTo, randomYTo)
+            layer.position = CGPoint(x: randomXTo, y: randomYTo)
             layer.opacity = 0.0
         }
     }

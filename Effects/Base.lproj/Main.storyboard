@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -14,39 +15,25 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qf6-Qw-eSJ" customClass="StarfieldView" customModule="Effects" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                <animations/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="speed">
-                                        <real key="value" value="1"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="starColor">
-                                        <color key="value" red="0.91068426285100501" green="0.86818422021448038" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="canvasColor">
-                                        <color key="value" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qf6-Qw-eSJ" customClass="LaserShowView" customModule="Effects" customModuleProvider="target">
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                         </subviews>
-                        <animations/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="qf6-Qw-eSJ" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="BkZ-tz-T8o"/>
-                            <constraint firstAttribute="trailing" secondItem="qf6-Qw-eSJ" secondAttribute="trailing" id="dRe-x6-whD"/>
-                            <constraint firstItem="qf6-Qw-eSJ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="euH-Og-EDW"/>
-                            <constraint firstItem="qf6-Qw-eSJ" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="vS6-2Y-e7z"/>
+                            <constraint firstAttribute="trailing" secondItem="qf6-Qw-eSJ" secondAttribute="trailing" id="Oc5-3d-u5h"/>
+                            <constraint firstItem="qf6-Qw-eSJ" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="-20" id="bbO-3S-LcN"/>
+                            <constraint firstItem="qf6-Qw-eSJ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="qOM-xn-CeG"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="qf6-Qw-eSJ" secondAttribute="bottom" id="udh-uu-D3U"/>
                         </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="453" y="497"/>
+            <point key="canvasLocation" x="285.60000000000002" y="498.80059970014997"/>
         </scene>
     </scenes>
 </document>

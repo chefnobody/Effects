@@ -9,14 +9,14 @@
 import UIKit
 
 public enum StarfieldDirection {
-    case EastWest
-    case WestEast
-    case NorthSouth
-    case SouthNorth
+    case eastWest
+    case westEast
+    case northSouth
+    case southNorth
 }
 
 @IBDesignable
-public class StarfieldView: UIView {
+open class StarfieldView: UIView {
     
     // MARK:- Public props for consumers
     
@@ -28,15 +28,15 @@ public class StarfieldView: UIView {
     // "Lorraine ... you are my density."
     @IBInspectable var density: Float = 0.1
     
-    @IBInspectable var direction: StarfieldDirection = .EastWest
-    @IBInspectable var starColor: UIColor = UIColor.whiteColor()
-    @IBInspectable var canvasColor: UIColor = UIColor.blackColor()
+    @IBInspectable var direction: StarfieldDirection = .eastWest
+    @IBInspectable var starColor: UIColor = UIColor.white
+    @IBInspectable var canvasColor: UIColor = UIColor.black
     
     // MARK:- Private props used to manage animations variables
 
     var size: CGFloat = 2.0
     var count: Int32 = 1000
-    var insetRect: CGRect = CGRectZero
+    var insetRect: CGRect = CGRect.zero
     var maxAnimationDuration: Float = 30.0
     var animationFillMode: String = kCAFillModeBoth
     
@@ -50,7 +50,7 @@ public class StarfieldView: UIView {
         super.init(coder: aDecoder)
     }
 
-    override public func layoutSubviews() {
+    override open func layoutSubviews() {
         super.layoutSubviews()
         
         // Can't find a better place for this. Setting it over and over seems redundant
@@ -59,7 +59,7 @@ public class StarfieldView: UIView {
         // Inset view rect so stars can appear as though they're coming from off-screen
         // this also seems to be the most reliable place for an accurate value for 'bounds'
         // otherwise I'd take it out of -layoutSubviews
-        insetRect = CGRectInset(bounds, -20, -20)
+        insetRect = bounds.insetBy(dx: -20, dy: -20)
 
         for i in 1...count {
             
@@ -68,8 +68,8 @@ public class StarfieldView: UIView {
             let randomBeginTime = Double(arc4random_uniform(UInt32(count) + 1))
             
             // determine from and to as CGPoints
-            let from = convertPoint(fromPoint(), toView: self)
-            let to = convertPoint(toPoint(), toView: self)
+            let from = convert(fromPoint(), to: self)
+            let to = convert(toPoint(), to: self)
             
             // ratio of random duration (speed of animation) to the total length of duration
             let beginTimeDurationFactor = randomDuration/Double(maxAnimationDuration)
@@ -78,9 +78,9 @@ public class StarfieldView: UIView {
             let squareSize = 10 - CGFloat(10 * beginTimeDurationFactor) // subtract from 10 to flip it.
             
             let shapeLayer = CALayer()
-            shapeLayer.bounds = CGRectMake(0, 0, squareSize, squareSize)
+            shapeLayer.bounds = CGRect(x: 0, y: 0, width: squareSize, height: squareSize)
             shapeLayer.position = from
-            shapeLayer.backgroundColor = starColor.CGColor
+            shapeLayer.backgroundColor = starColor.cgColor
             
             let fromValue = interpolatingValue(from);
             let toValue = interpolatingValue(to)
@@ -88,7 +88,7 @@ public class StarfieldView: UIView {
             
             layer.addSublayer(shapeLayer)
             
-            shapeLayer.addAnimation(animation, forKey: ("movement-animation-\(i)"))
+            shapeLayer.add(animation, forKey: ("movement-animation-\(i)"))
             
             // set layer's final position
             shapeLayer.position = to
@@ -98,47 +98,47 @@ public class StarfieldView: UIView {
     // MARK:- Private methods
     
     func fromPoint() -> CGPoint {
-        let randomX = CGFloat(randomIntUpToMax(Int(CGRectGetWidth(insetRect))))
-        let randomY = CGFloat(randomIntUpToMax(Int(CGRectGetHeight(insetRect))))
+        let randomX = CGFloat(randomIntUpToMax(Int(insetRect.width)))
+        let randomY = CGFloat(randomIntUpToMax(Int(insetRect.height)))
         
         switch direction {
-        case .EastWest:
-            return CGPointMake(CGRectGetMinX(insetRect), randomY)
-        case .NorthSouth:
-            return CGPointMake(randomX, CGRectGetMinY(insetRect))
-        case .SouthNorth:
-            return CGPointMake(randomX, CGRectGetMaxY(insetRect))
-        case .WestEast:
-            return CGPointMake(CGRectGetMaxX(insetRect), randomY)
+        case .eastWest:
+            return CGPoint(x: insetRect.minX, y: randomY)
+        case .northSouth:
+            return CGPoint(x: randomX, y: insetRect.minY)
+        case .southNorth:
+            return CGPoint(x: randomX, y: insetRect.maxY)
+        case .westEast:
+            return CGPoint(x: insetRect.maxX, y: randomY)
         }
     }
     
     func toPoint() -> CGPoint {
-        let randomX = CGFloat(randomIntUpToMax(Int(CGRectGetWidth(insetRect))))
-        let randomY = CGFloat(randomIntUpToMax(Int(CGRectGetHeight(insetRect))))
+        let randomX = CGFloat(randomIntUpToMax(Int(insetRect.width)))
+        let randomY = CGFloat(randomIntUpToMax(Int(insetRect.height)))
         
         switch direction {
-        case .EastWest:
-            return CGPointMake(CGRectGetMaxX(insetRect), randomY)
-        case .NorthSouth:
-            return CGPointMake(randomX, CGRectGetMaxY(insetRect))
-        case .SouthNorth:
-            return CGPointMake(randomX, CGRectGetMinY(insetRect))
-        case .WestEast:
-            return CGPointMake(CGRectGetMinX(insetRect), randomY)
+        case .eastWest:
+            return CGPoint(x: insetRect.maxX, y: randomY)
+        case .northSouth:
+            return CGPoint(x: randomX, y: insetRect.maxY)
+        case .southNorth:
+            return CGPoint(x: randomX, y: insetRect.minY)
+        case .westEast:
+            return CGPoint(x: insetRect.minX, y: randomY)
         }
     }
     
-    func interpolatingValue(point: CGPoint) -> CGFloat {
+    func interpolatingValue(_ point: CGPoint) -> CGFloat {
         switch direction {
-        case .EastWest, .WestEast:
+        case .eastWest, .westEast:
             return point.x
-        case .NorthSouth, .SouthNorth:
+        case .northSouth, .southNorth:
             return point.y
         }
     }
     
-    func createBasicAnimation(fromValue: CGFloat, toValue: CGFloat, duration: Double, beginTime: Double, speed: Float) -> CABasicAnimation {
+    func createBasicAnimation(_ fromValue: CGFloat, toValue: CGFloat, duration: Double, beginTime: Double, speed: Float) -> CABasicAnimation {
         let animation = CABasicAnimation()
         animation.keyPath = keyPathFromDirection()
         animation.fromValue = fromValue
@@ -152,14 +152,14 @@ public class StarfieldView: UIView {
     
     func keyPathFromDirection() -> String {
         switch direction {
-        case .EastWest, .WestEast:
+        case .eastWest, .westEast:
             return "position.x"
-        case .NorthSouth, .SouthNorth:
+        case .northSouth, .southNorth:
             return "position.y"
         }
     }
     
-    func randomIntUpToMax(max: Int) -> UInt32 {
+    func randomIntUpToMax(_ max: Int) -> UInt32 {
         return arc4random_uniform(UInt32(max)) + 1
     }
 }
