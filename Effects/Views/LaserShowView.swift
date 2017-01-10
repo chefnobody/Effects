@@ -14,8 +14,68 @@ open class LaserShowView: UIView {
     @IBInspectable var laserCount: Int = 1000
     @IBInspectable var animationDuration: Double = 10.0
     
+    let screenOffset:CGFloat = 100.0
+    
+    // random Y from 0 through the screen height
+    func randomY() -> CGFloat {
+        return CGFloat(arc4random_uniform(UInt32(frame.height) + 1))
+    }
+    
+    // returns a tuple for to/from values
+    func horizontalOffsets() -> (to: CGFloat, from: CGFloat) {
+        return (-1 * screenOffset, frame.width + screenOffset)
+    }
+    
+    func generateLineAnimation(startTimeOffset:CFTimeInterval) {
+        
+        let y = randomY()
+        let (horizontalTo, horizontalFrom) = horizontalOffsets()
+        
+        let path = UIBezierPath()
+        path.move(to: CGPoint(x: horizontalTo, y: y))
+        path.addLine(to: CGPoint(x: horizontalFrom, y: y))
+        
+        let lineLayer = CAShapeLayer()
+        lineLayer.path = path.cgPath
+        lineLayer.strokeColor = UIColor.black.cgColor
+        lineLayer.lineWidth = 2.0
+        
+        // stroke end animation
+        let strokeEndAnimation = CABasicAnimation()
+        strokeEndAnimation.keyPath = "strokeEnd"
+        strokeEndAnimation.fromValue = 0.0
+        strokeEndAnimation.toValue = 1.0
+        strokeEndAnimation.duration = 0.5
+        strokeEndAnimation.fillMode = kCAFillModeBoth
+        strokeEndAnimation.beginTime = 0.0
+        strokeEndAnimation.isRemovedOnCompletion = true
+        lineLayer.add(strokeEndAnimation, forKey: "strokeEndAnimation")
+        
+        // stroke start 
+        let strokeStartAnimation = CABasicAnimation()
+        strokeStartAnimation.keyPath = "strokeStart"
+        strokeStartAnimation.fromValue = 0.0
+        strokeStartAnimation.toValue = 1.0
+        strokeStartAnimation.duration = 0.5
+        strokeStartAnimation.fillMode = kCAFillModeBoth
+        strokeStartAnimation.beginTime = CACurrentMediaTime() + startTimeOffset
+        strokeStartAnimation.isRemovedOnCompletion = true
+        lineLayer.add(strokeStartAnimation, forKey: "strokeStartAnimation")
+        
+        lineLayer.strokeStart = 1.0
+        lineLayer.strokeEnd = 1.0
+        
+        layer.addSublayer(lineLayer)
+    }
+    
     override open func layoutSubviews() {
         super.layoutSubviews()
+    
+        print("layoutSubviews called")
+        
+        generateLineAnimation(startTimeOffset: 0.25)
+        
+
         
         // offset main view rect by 200 on all sides so dots will come from off-screen sometimes.
 //        let insetRect = self.frame.insetBy(dx: -10, dy: -10)
@@ -27,14 +87,14 @@ open class LaserShowView: UIView {
         
 //        let laserColor = UIColor.lightGray
         
-        var points: [CGPoint]
+//        var points: [CGPoint]
         
-        for _ in 1...laserCount {
-            let point = frame.randomPointInside()
-            points.append(point)
-        }
+//        for _ in 1...laserCount {
+//            let point = frame.randomPointInside()
+//            points.append(point)
+//        }
         
-        self.layer.addSublayer(<#T##layer: CALayer##CALayer#>)
+        //self.layer.addSublayer(<#T##layer: CALayer##CALayer#>)
             
 //            //let xFrom = minX
 //            //let xTo = maxX
@@ -116,7 +176,7 @@ open class LaserShowView: UIView {
         //}
     }
     
-    // MARK:- Private methods
+    // MARK:- Helper methods
     
     // returns a shape layer, its reference start-point and length for use by an animation
     func getLineShapeLayer(_ referenceFrame: CGRect, yPosition: CGFloat, flip: Bool) -> (CAShapeLayer, CGPoint, CGFloat) {
