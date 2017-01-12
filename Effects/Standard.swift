@@ -20,3 +20,7 @@ extension CGRect {
 extension CGPoint {
 
 }
+
+protocol FancyAnimatable {
+    func runAnimations()
+}

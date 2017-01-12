@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -25,19 +26,33 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BbJ-eU-lXb">
+                                <rect key="frame" x="128" y="617" width="126" height="30"/>
+                                <state key="normal" title="Run Animations"/>
+                                <connections>
+                                    <action selector="runAnimationsButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5h2-aL-tDe"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="BbJ-eU-lXb" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="128" id="0Qy-j7-6gF"/>
+                            <constraint firstAttribute="trailing" secondItem="BbJ-eU-lXb" secondAttribute="trailing" constant="121" id="INs-m4-Y4L"/>
                             <constraint firstAttribute="trailing" secondItem="qf6-Qw-eSJ" secondAttribute="trailing" id="Oc5-3d-u5h"/>
                             <constraint firstItem="qf6-Qw-eSJ" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="-20" id="bbO-3S-LcN"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="BbJ-eU-lXb" secondAttribute="bottom" constant="20" id="kIG-7m-aU7"/>
+                            <constraint firstItem="BbJ-eU-lXb" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="3.5" id="oSF-WA-ew6"/>
                             <constraint firstItem="qf6-Qw-eSJ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="qOM-xn-CeG"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="qf6-Qw-eSJ" secondAttribute="bottom" id="udh-uu-D3U"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="animationView" destination="qf6-Qw-eSJ" id="Zoi-Wi-D3k"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="285.60000000000002" y="498.80059970014997"/>
+            <point key="canvasLocation" x="-119" y="555"/>
         </scene>
     </scenes>
 </document>
