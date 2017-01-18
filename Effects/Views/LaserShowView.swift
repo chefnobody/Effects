@@ -9,10 +9,11 @@
 import UIKit
 
 @IBDesignable
-open class LaserShowView: UIView, FancyAnimatable {
+open class LaserShowView: UIView {
     
-    @IBInspectable var laserCount: Int = 10
-    @IBInspectable var animationDuration: Double = 10.0
+    @IBInspectable var laserCount: Int = 50
+    @IBInspectable var animationDuration: Double = 1.0
+    @IBInspectable var laserLengthLagTime: Double = 0.5
     
     let screenOffset:CGFloat = 100.0
     
@@ -43,65 +44,23 @@ open class LaserShowView: UIView, FancyAnimatable {
         }
     }
     
-    override open func layoutSubviews() {
-        super.layoutSubviews()
-    }
-    
-    // MARK:- FancyAnimatable
-    
-    func runAnimations() {
-        var startTimeOffset:Double = 0.25
-        
-        for laserLayer in laserLayers {
-            
-            let strokeEndAnimation = createBasicAnimation(keyPath: "strokeEnd",
-                                                          fromValue: 0.0,
-                                                          toValue: 1.0,
-                                                          duration: 0.5,
-                                                          fillMode: kCAFillModeBoth,
-                                                          beginTime: CACurrentMediaTime(),
-                                                          removeOnCompletion: true)
-            
-            let strokeStartAnimation = createBasicAnimation(keyPath: "strokeStart",
-                                                            fromValue: 0.0,
-                                                            toValue: 1.0,
-                                                            duration: 0.5,
-                                                            fillMode: kCAFillModeBoth,
-                                                            beginTime: CACurrentMediaTime() + startTimeOffset,
-                                                            removeOnCompletion: true)
-            
-            laserLayer.add(strokeEndAnimation, forKey: "strokeEndAnimation")
-            laserLayer.add(strokeStartAnimation, forKey: "strokeStartAnimation")
-            
-            // should set this elsewhere, meh ...
-            laserLayer.strokeStart = 1.0
-            laserLayer.strokeEnd = 1.0
-            
-            // Randomly move each layer to some y position.
-            //laserLayer.position = CGPoint(x: laserLayer.position.x, y: randomY())
-            
-            // push time offset a little
-            startTimeOffset += 0.2
-        }
-    }
-    
     // MARK:- Helper methods
     
-    // Random Y from 0 through the screen height
+    // Random Y somewhere inside the bounds
     func randomY() -> CGFloat {
-        return CGFloat(arc4random_uniform(UInt32(frame.height) + 1))
+        return CGFloat(arc4random_uniform(UInt32(bounds.height) + 1))
     }
     
     // Returns a tuple for to/from values for offseting a value across the view's frame horizontally
     func horizontalOffsets() -> (to: CGFloat, from: CGFloat) {
-        return (-1 * screenOffset, frame.width + screenOffset)
+        return (-1 * screenOffset, bounds.width + screenOffset)
     }
     
     // Creates a CAShapeLayer at a random Y that spans the view horizontally, such that when its stroke is animated it appears to start and end off-screen.
     func createLineLayer() -> CAShapeLayer {
         
-        // Randomly align layer somewhere along the vertical.
-        let y:CGFloat = randomY()
+        // Start layer at the 0 for Y position.
+        let y:CGFloat = 0
         let (horizontalTo, horizontalFrom) = horizontalOffsets()
         
         let path = UIBezierPath()
@@ -118,11 +77,20 @@ open class LaserShowView: UIView, FancyAnimatable {
         lineLayer.strokeStart = 0.0
         lineLayer.strokeEnd = 0.0
         
+        // Randomly position line layer
+        moveLineLayer(shapeLayer: lineLayer)
+        
         return lineLayer
     }
     
     // Creates a CABasicAnimation instance with the provided inputs
-    func createBasicAnimation(keyPath:String, fromValue:Any?, toValue:Any?, duration:CFTimeInterval, fillMode:String, beginTime:CFTimeInterval, removeOnCompletion:Bool) -> CABasicAnimation {
+    func animate(forLayer layer: CAShapeLayer, keyPath:String, fromValue:Any?, toValue:Any?, duration:CFTimeInterval, fillMode:String, beginTime:CFTimeInterval, withAdditiveAnimation:Bool) {
+        
+        // Disable the implicit animation and set the keyPath toValue for the model:
+        CATransaction.begin()
+        CATransaction.setDisableActions(true)
+        layer.setValue(toValue, forKey: keyPath)
+        CATransaction.commit()
         
         let animation = CABasicAnimation()
         animation.keyPath = keyPath
@@ -131,7 +99,75 @@ open class LaserShowView: UIView, FancyAnimatable {
         animation.duration = duration
         animation.fillMode = fillMode
         animation.beginTime = beginTime
-        animation.isRemovedOnCompletion = removeOnCompletion
-        return animation
+        animation.delegate = self
+        
+        layer.add(animation, forKey: "\(keyPath)-Animation")
+        
+        // Cool: Add an additive stroke/line width animation
+        if (withAdditiveAnimation) {
+            // Disable the implicit animation
+            CATransaction.begin()
+            CATransaction.setDisableActions(true)
+            layer.lineWidth = 6.0
+            CATransaction.commit()
+            
+            let deviate = CABasicAnimation(keyPath: "lineWidth")
+            deviate.isAdditive = true
+            deviate.toValue = 6.0
+            deviate.fromValue = 2.0
+            deviate.autoreverses = true
+            deviate.duration = 0.1
+            deviate.timingFunction = CAMediaTimingFunction(name: "easeInEaseOut")
+            deviate.beginTime = beginTime
+            layer.add(deviate, forKey: "lineWidth-Additive-Animation")
+        }
+    }
+}
+
+extension LaserShowView: FancyAnimatable {
+    // MARK:- FancyAnimatable
+    
+    func runAnimations() {
+        var startTimeOffset:Double = 0.0
+        
+        for lineLayer in laserLayers {
+            
+            animate(forLayer: lineLayer,
+                    keyPath: "strokeEnd",
+                    fromValue: 0.0,
+                    toValue: 1.0,
+                    duration: animationDuration,
+                    fillMode: kCAFillModeBoth,
+                    beginTime: CACurrentMediaTime() + startTimeOffset,
+                    withAdditiveAnimation: false)
+            
+            animate(forLayer: lineLayer,
+                    keyPath: "strokeStart",
+                    fromValue: 0.0,
+                    toValue: 1.0,
+                    duration: animationDuration,
+                    fillMode: kCAFillModeBoth,
+                    beginTime: CACurrentMediaTime() + startTimeOffset + laserLengthLagTime,
+                    withAdditiveAnimation: false)
+            
+            // push time offset a little
+            startTimeOffset += 0.2
+        
+            moveLineLayer(shapeLayer: lineLayer)
+        }
+    }
+    
+    func moveLineLayer(shapeLayer: CAShapeLayer) {
+        // Reposition the line layer and don't forget to disable the implicit animation.
+        CATransaction.begin()
+        CATransaction.setDisableActions(true)
+        shapeLayer.position.y = randomY()
+        CATransaction.commit()
+    }
+}
+
+extension LaserShowView: CAAnimationDelegate {
+    public func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
+        print("\(anim) finished: \(flag)")
     }
 }
