@@ -11,7 +11,7 @@ import UIKit
 @IBDesignable
 open class LaserShowView: UIView {
     
-    @IBInspectable var laserCount: Int = 50
+    @IBInspectable var laserCount: Int = 5
     @IBInspectable var animationDuration: Double = 1.0
     @IBInspectable var laserLengthLagTime: Double = 0.5
     
